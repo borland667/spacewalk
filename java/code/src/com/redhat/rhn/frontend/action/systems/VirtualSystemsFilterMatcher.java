@@ -18,6 +18,7 @@ import com.redhat.rhn.frontend.dto.VirtualSystemOverview;
 import com.redhat.rhn.frontend.filter.Matcher;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -25,6 +26,8 @@ import org.apache.commons.lang.StringUtils;
  * @version $Rev$
  */
 public class VirtualSystemsFilterMatcher implements Matcher {
+    private static final Logger LOG = Logger.getLogger(VirtualSystemsFilterMatcher.class);
+
     /**
      *
      * {@inheritDoc}
@@ -37,6 +40,8 @@ public class VirtualSystemsFilterMatcher implements Matcher {
             return true; ///show all if I entered a blank value
         }
         VirtualSystemOverview current = (VirtualSystemOverview) obj;
+        LOG.error("RESULT: " + current.getName() + "   " + current.getId() + "  " +
+                current.getServerName());
         String value = "";
         if (current.getIsVirtualHost()) {
             value = current.getServerName();
